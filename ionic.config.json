@@ -1,0 +1,7 @@
+{
+  "name": "wayfindr",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
