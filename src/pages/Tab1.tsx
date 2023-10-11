@@ -1,15 +1,21 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnter } from '@ionic/react';
-import './Tab1.css';
-import { FullMap } from '../components/FullMap';
-
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  useIonViewDidEnter,
+} from "@ionic/react";
+import "./Tab1.css";
+import { FullMap } from "../components/FullMap";
+import { MapGuide } from "../components/MapGuide";
 
 const Tab1: React.FC = () => {
-
   /**
    * Trigger a 'resize' event when Page has finished rendering and animating, so leaflet map can read a consistent height value.
    */
   useIonViewDidEnter(() => {
-    window.dispatchEvent(new Event('resize'));
+    window.dispatchEvent(new Event("resize"));
   });
 
   return (
@@ -20,13 +26,17 @@ const Tab1: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
+        {/* <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Tab 1</IonTitle>
           </IonToolbar>
-        </IonHeader>
+        </IonHeader> */}
         <div className="leaflet-container">
-          <FullMap/>
+          <FullMap />
+        </div>
+
+        <div className="flex justify-center">
+          <MapGuide />
         </div>
       </IonContent>
     </IonPage>

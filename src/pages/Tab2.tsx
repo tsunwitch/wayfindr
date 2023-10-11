@@ -13,23 +13,32 @@ import ExploreContainer from "../components/ExploreContainer";
 import "./Tab2.css";
 
 type Waypoint = {
+  name?: string;
   coordinates: [number, number];
 };
 
 type Route = {
   name: string;
-  // waypoints : Waypoint
+  waypoints: Waypoint[];
 };
 
 const routes: Route[] = [
   {
     name: "Route 1",
-  },
-  {
-    name: "Route 2",
-  },
-  {
-    name: "Route 3",
+    waypoints: [
+      {
+        name: "Cavatina hall",
+        coordinates: [49.7835438, 19.0589105],
+      },
+      {
+        name: "Wypozyczalnia rowerow jakichs",
+        coordinates: [49.80949682048584, 19.055480571676213],
+      },
+      {
+        name: "Properek palarnia kawy",
+        coordinates: [49.79121684091902, 19.04904182651327],
+      },
+    ],
   },
 ];
 
