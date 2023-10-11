@@ -1,27 +1,37 @@
-import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Tab2.css';
+import {
+  IonContent,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import ExploreContainer from "../components/ExploreContainer";
+import "./Tab2.css";
 
 type Waypoint = {
-  coordinates : [number, number]
-}
+  coordinates: [number, number];
+};
 
 type Route = {
-  name: string,
+  name: string;
   // waypoints : Waypoint
-}
+};
 
 const routes: Route[] = [
   {
-    name: "Route 1"
+    name: "Route 1",
   },
   {
-    name: "Route 2"
+    name: "Route 2",
   },
   {
-    name: "Route 3"
-  }
-]
+    name: "Route 3",
+  },
+];
 
 const Tab2: React.FC = () => {
   return (
@@ -41,15 +51,13 @@ const Tab2: React.FC = () => {
           <IonListHeader>
             <IonLabel>Choose a route you want to follow</IonLabel>
           </IonListHeader>
-          {
-            routes.map((route: Route) => {
-              return (
-                <IonItem>
-                  <IonLabel>{route.name}</IonLabel>
-                </IonItem>
-              )
-            })
-          }
+          {routes.map((route: Route) => {
+            return (
+              <IonItem>
+                <IonLabel>{route.name}</IonLabel>
+              </IonItem>
+            );
+          })}
         </IonList>
       </IonContent>
     </IonPage>
