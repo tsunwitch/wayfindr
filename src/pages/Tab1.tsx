@@ -1,8 +1,17 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnter } from '@ionic/react';
 import './Tab1.css';
+import { FullMap } from '../components/FullMap';
+
 
 const Tab1: React.FC = () => {
+
+  /**
+   * Trigger a 'resize' event when Page has finished rendering and animating, so leaflet map can read a consistent height value.
+   */
+  useIonViewDidEnter(() => {
+    window.dispatchEvent(new Event('resize'));
+  });
+
   return (
     <IonPage>
       <IonHeader>
@@ -16,7 +25,9 @@ const Tab1: React.FC = () => {
             <IonTitle size="large">Tab 1</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Tab 1 page" />
+        <div className="leaflet-container">
+          <FullMap/>
+        </div>
       </IonContent>
     </IonPage>
   );
