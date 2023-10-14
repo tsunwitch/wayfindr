@@ -1,9 +1,24 @@
+import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
 export const FullMap = () => {
+  const [position, setPosition] = useState<GeolocationPosition | null>(null);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setPosition(position);
+      console.log(position);
+    });
+  }, []);
+
+  console.log(position?.coords.latitude ?? 0, position?.coords.longitude ?? 0);
+
+  if (!position) {
+    return <></>;
+  }
+
   return (
     <MapContainer
-      center={[49.7835438, 19.0589105]}
+      center={[position?.coords.latitude ?? 0, position?.coords.longitude ?? 0]}
       zoom={100}
       scrollWheelZoom={false}
     >
