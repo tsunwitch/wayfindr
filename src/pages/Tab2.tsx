@@ -79,6 +79,7 @@ const Tab2: React.FC = () => {
             return (
               <IonItem
                 className="py-2 text-slate-100 ion-activatable"
+                routerLink="/tab1"
                 key={routeIndex}
                 onClick={() => {
                   setSelectedRoute(route);
