@@ -13,18 +13,8 @@ import {
 import "./Tab2.css";
 import { locationOutline } from "ionicons/icons";
 import { useState } from "react";
-import { useSelectedRoute } from "../providers/selectedRouteProvider";
-
-type Waypoint = {
-  name?: string;
-  coordinates: [number, number];
-};
-
-type Route = {
-  id: number;
-  name: string;
-  waypoints: Waypoint[];
-};
+import { useSelectedRoute } from "../providers/SelectedRouteProvider";
+import { Route, Waypoint } from "../types";
 
 const routes: Route[] = [
   {
@@ -88,29 +78,28 @@ const Tab2: React.FC = () => {
           {routes.map((route: Route, routeIndex) => {
             return (
               <IonItem
+                className="py-2 text-slate-100 ion-activatable"
                 key={routeIndex}
                 onClick={() => {
-                  setSelectedRoute(routeIndex);
+                  setSelectedRoute(route);
                 }}
               >
-                <div className="flex flex-col">
+                <div className="flex flex-col my-2">
                   <IonLabel key={route.id}>{route.name}</IonLabel>
-                  <IonList inset={true}>
+                  <p className="mt-2 text-[12px] text-gray-400">
                     {route.waypoints.map(
                       (waypoint: Waypoint, waypointIndex: number) => {
                         return (
-                          <IonItem className="text-sm" key={waypointIndex}>
-                            <IonIcon
-                              size="small"
-                              className="px-4"
-                              icon={locationOutline}
-                            />
+                          <span>
                             {waypoint.name}
-                          </IonItem>
+                            {waypointIndex < route.waypoints.length - 1
+                              ? " ・ "
+                              : ""}
+                          </span>
                         );
                       }
                     )}
-                  </IonList>
+                  </p>
                 </div>
               </IonItem>
             );
