@@ -1,5 +1,5 @@
-import { LatLng } from "leaflet";
 import { useEffect, useState } from "react";
+import { Route, Waypoint } from "../types";
 import {
   MapContainer,
   Marker,
@@ -7,19 +7,34 @@ import {
   TileLayer,
   Polyline,
 } from "react-leaflet";
-
-const response = await fetch(
-  "http://router.project-osrm.org/route/v1/driving/long,lat;long2,lat2?steps=true&annotations=true&geometries=geojson&overview=full"
-);
+import { useSelectedRoute } from "../providers/SelectedRouteProvider";
+import { LatLng, LatLngExpression } from "leaflet";
 
 async function getRoutePoints(
-  lat1: number,
-  long1: number,
-  lat2: number,
-  long2: number
+  waypoints: Waypoint[],
+  position: GeolocationPosition | null
 ): Promise<Response> {
+  if (!position) {
+    return new Response();
+  }
+  //parse waypoints to a single string
+  let coordinateString: string = "";
+
+  coordinateString +=
+    position.coords.latitude + "," + position.coords.longitude + ";";
+
+  waypoints.map((waypoint, index) => {
+    coordinateString += waypoint.coordinates[0] + "," + waypoint.coordinates[1];
+
+    if (index < waypoints.length - 1) {
+      coordinateString += ";";
+    }
+  });
+
+  console.log(coordinateString);
+
   const response = await fetch(
-    `http://router.project-osrm.org/route/v1/driving/${long1},${lat1};${long2},${lat2}?steps=true&annotations=true&geometries=geojson&overview=full`
+    `https://router.project-osrm.org/route/v1/driving/19.0473,49.81;19.05913660621896,49.78361006577234?steps=true&annotations=true&geometries=geojson&overview=full`
   );
 
   return response;
@@ -29,7 +44,7 @@ async function parseRoutePoints(response: Response) {
   const router = (await response.json())["routes"][0]["geometry"][
     "coordinates"
   ];
-  const routepoints: any[] = [];
+  const routepoints: LatLngExpression[] = [];
 
   for (let i = 0; i < router.length; i++) {
     const split = router[i]
@@ -38,16 +53,32 @@ async function parseRoutePoints(response: Response) {
       .replaceAll("]", "")
       .split(",");
 
-    routepoints.push([parseFloat(split[0]), parseFloat(split[1])]);
+    routepoints.push(new LatLng(split[0], split[1]));
   }
+  console.log(`dupa ${routepoints}`);
+  return routepoints;
 }
 
 export const FullMap = () => {
   const [position, setPosition] = useState<GeolocationPosition | null>(null);
+  const { selectedRoute } = useSelectedRoute();
+  const [routePoints, setRoutePoints] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (selectedRoute) {
+      getRoutePoints(selectedRoute.waypoints, position).then((response) => {
+        parseRoutePoints(response).then((xd) => {
+          console.log(xd);
+          setRoutePoints(xd);
+        });
+      });
+    }
+  }, [selectedRoute]);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       setPosition(position);
-      console.log(position);
+      console.log(`position: ${position}`);
     });
   }, []);
 
@@ -71,8 +102,10 @@ export const FullMap = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Polyline pathOptions={{ color: "red" }} positions={[]} />
-        <Marker position={[49.7835438, 19.0589105]}>
+        <Polyline pathOptions={{ color: "red" }} positions={[routePoints]} />
+        <Marker
+          position={[position.coords.latitude, position.coords.longitude]}
+        >
           <Popup>tutaj lukasz nadupia kod</Popup>
         </Marker>
       </MapContainer>

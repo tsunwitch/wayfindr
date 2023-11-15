@@ -11,43 +11,48 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./Tab2.css";
-import { locationOutline } from "ionicons/icons";
-import { useState } from "react";
 import { useSelectedRoute } from "../providers/SelectedRouteProvider";
 import { Route, Waypoint } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 const routes: Route[] = [
   {
-    id: 1,
+    id: uuidv4(),
     name: "Route 1",
     waypoints: [
       {
+        id: uuidv4(),
         name: "Cavatina hall",
         coordinates: [49.7835438, 19.0589105],
       },
       {
+        id: uuidv4(),
         name: "Wypozyczalnia rowerow jakichs",
         coordinates: [49.80949682048584, 19.055480571676213],
       },
       {
+        id: uuidv4(),
         name: "Properek palarnia kawy",
         coordinates: [49.79121684091902, 19.04904182651327],
       },
     ],
   },
   {
-    id: 2,
+    id: uuidv4(),
     name: "Route 2",
     waypoints: [
       {
+        id: uuidv4(),
         name: "Błonia",
         coordinates: [49.7835438, 19.0589105],
       },
       {
+        id: uuidv4(),
         name: "Magdonal mickiewicz",
         coordinates: [49.80949682048584, 19.055480571676213],
       },
       {
+        id: uuidv4(),
         name: "SLOWAK AUUUUUUU",
         coordinates: [49.79121684091902, 19.04904182651327],
       },
