@@ -21,10 +21,10 @@ async function getRoutePoints(
   let coordinateString: string = "";
 
   coordinateString +=
-    position.coords.latitude + "," + position.coords.longitude + ";";
+    position.coords.longitude + "," + position.coords.latitude + ";";
 
   waypoints.map((waypoint, index) => {
-    coordinateString += waypoint.coordinates[0] + "," + waypoint.coordinates[1];
+    coordinateString += waypoint.coordinates[1] + "," + waypoint.coordinates[0];
 
     if (index < waypoints.length - 1) {
       coordinateString += ";";
@@ -34,7 +34,7 @@ async function getRoutePoints(
   console.log(coordinateString);
 
   const response = await fetch(
-    `https://router.project-osrm.org/route/v1/driving/19.0473,49.81;19.05913660621896,49.78361006577234?steps=true&annotations=true&geometries=geojson&overview=full`
+    `https://router.project-osrm.org/route/v1/driving/${coordinateString}?steps=true&annotations=true&geometries=geojson&overview=full`
   );
 
   return response;
@@ -53,7 +53,7 @@ async function parseRoutePoints(response: Response) {
       .replaceAll("]", "")
       .split(",");
 
-    routepoints.push(new LatLng(split[0], split[1]));
+    routepoints.push(new LatLng(split[1], split[0]));
   }
   console.log(`dupa ${routepoints}`);
   return routepoints;
@@ -106,7 +106,7 @@ export const FullMap = () => {
         <Marker
           position={[position.coords.latitude, position.coords.longitude]}
         >
-          <Popup>tutaj lukasz nadupia kod</Popup>
+          <Popup>Your position</Popup>
         </Marker>
       </MapContainer>
     </>
