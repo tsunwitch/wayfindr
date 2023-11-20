@@ -15,7 +15,7 @@ export const MapGuide = () => {
             {selectedRoute.waypoints.map(
               (waypoint: Waypoint, waypointIndex: number) => {
                 return (
-                  <span>
+                  <span key={waypointIndex}>
                     {waypoint.name}
                     {waypointIndex < selectedRoute.waypoints.length - 1
                       ? " ・ "

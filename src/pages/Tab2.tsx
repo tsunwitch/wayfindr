@@ -96,7 +96,7 @@ const Tab2: React.FC = () => {
                     {route.waypoints.map(
                       (waypoint: Waypoint, waypointIndex: number) => {
                         return (
-                          <span>
+                          <span key={waypointIndex}>
                             {waypoint.name}
                             {waypointIndex < route.waypoints.length - 1
                               ? " ・ "
