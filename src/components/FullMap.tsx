@@ -7,7 +7,7 @@ import {
   TileLayer,
   Polyline,
 } from "react-leaflet";
-import { useSelectedRoute } from "../providers/SelectedRouteProvider";
+import { useSelectedRoute } from "../providers/RouteProvider";
 import { LatLng, LatLngExpression } from "leaflet";
 
 async function getRoutePoints(
@@ -31,8 +31,6 @@ async function getRoutePoints(
     }
   });
 
-  console.log(coordinateString);
-
   const response = await fetch(
     `https://router.project-osrm.org/route/v1/driving/${coordinateString}?steps=true&annotations=true&geometries=geojson&overview=full`
   );
@@ -55,34 +53,31 @@ async function parseRoutePoints(response: Response) {
 
     routepoints.push(new LatLng(split[1], split[0]));
   }
-  console.log(`dupa ${routepoints}`);
   return routepoints;
 }
 
 export const FullMap = () => {
   const [position, setPosition] = useState<GeolocationPosition | null>(null);
-  const { selectedRoute } = useSelectedRoute();
+  const routeProvider = useSelectedRoute();
   const [routePoints, setRoutePoints] = useState<any[]>([]);
 
   useEffect(() => {
-    if (selectedRoute) {
-      getRoutePoints(selectedRoute.waypoints, position).then((response) => {
-        parseRoutePoints(response).then((xd) => {
-          console.log(xd);
-          setRoutePoints(xd);
-        });
-      });
+    if (routeProvider.selectedRoute) {
+      getRoutePoints(routeProvider.selectedRoute.waypoints, position).then(
+        (response) => {
+          parseRoutePoints(response).then((xd) => {
+            setRoutePoints(xd);
+          });
+        }
+      );
     }
-  }, [selectedRoute]);
+  }, [routeProvider.selectedRoute]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       setPosition(position);
-      console.log(`position: ${position}`);
     });
   }, []);
-
-  console.log(position?.coords.latitude ?? 0, position?.coords.longitude ?? 0);
 
   if (!position) {
     return <></>;

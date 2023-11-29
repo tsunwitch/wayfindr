@@ -1,14 +1,14 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import { SelectedRouteProvider } from "./providers/SelectedRouteProvider";
+import { RouteProvider } from "./providers/RouteProvider";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <SelectedRouteProvider>
+    <RouteProvider>
       <App />
-    </SelectedRouteProvider>
+    </RouteProvider>
   </React.StrictMode>
 );

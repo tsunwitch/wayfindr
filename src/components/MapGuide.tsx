@@ -1,6 +1,6 @@
 import { IonButton, IonIcon } from "@ionic/react";
 import { useState } from "react";
-import { useSelectedRoute } from "../providers/SelectedRouteProvider";
+import { useSelectedRoute } from "../providers/RouteProvider";
 import { Waypoint } from "../types";
 
 export const MapGuide = () => {
