@@ -103,6 +103,27 @@ export const FullMap = () => {
         >
           <Popup>Your position</Popup>
         </Marker>
+        {routeProvider.selectedRoute &&
+          routeProvider.selectedRoute.waypoints.map(
+            (waypoint: Waypoint, waypointIndex: number) => {
+              return (
+                <Marker
+                  key={waypointIndex}
+                  position={[waypoint.coordinates[0], waypoint.coordinates[1]]}
+                >
+                  <Popup>
+                    <b>{waypoint.name}</b> <br />
+                    <img
+                      src="https://api.mganczarczyk.pl/tairiku/random/streetmoe?safety=true"
+                      alt=""
+                      className="rounded-xl w-full"
+                    />
+                    <br /> {waypoint.description}
+                  </Popup>
+                </Marker>
+              );
+            }
+          )}
       </MapContainer>
     </>
   );

@@ -1,6 +1,7 @@
 export type Waypoint = {
   id: string;
   name?: string;
+  description?: string;
   coordinates: [number, number];
 };
 
