@@ -13,21 +13,23 @@ const routes = [
       {
         id: uuidv4(),
         name: "Cavatina hall",
-        description: "Best hall in the world",
-        coordinates: [49.7835438, 19.0589105],
+        description:
+          "Cavatina Hall to wyjątkowa filharmonia, gdzie sztuka muzyczna spotyka się z elegancją i doskonałą akustyką. Usytuowana w sercu miasta, Cavatina Hall to miejsce, które przyciąga miłośników muzyki klasycznej i wysokiej jakości wykonania. Sale koncertowe zostały zaprojektowane z dbałością o detale, aby zapewnić doskonałą jakość dźwięku i unikalne wrażenia muzyczne. W Cavatina Hall regularnie odbywają się koncerty różnych gatunków muzycznych, prezentując talent lokalnych i międzynarodowych artystów. Atmosfera tego miejsca emanuje szlachetnością i kulturą, co czyni je doskonałym miejscem dla miłośników muzyki, którzy pragną doświadczyć koncertów na najwyższym poziomie w estetycznym otoczeniu Cavatina Hall.",
+        coordinates: [49.81785219557425, 19.049582714262858],
       },
       {
         id: uuidv4(),
-        name: "Wypozyczalnia rowerow jakichs",
-        description: "Rent some bike my dude",
-        coordinates: [49.80949682048584, 19.055480571676213],
+        name: "McDonalds Mickiewicz",
+        description:
+          "McDonald's Mickiewicz to wyjątkowa restauracja sieci McDonald's, która łączy światową markę z lokalnym charakterem. Znajdująca się w centrum miasta, ta restauracja zachwyca gości nie tylko klasycznymi smakami fast food, ale także przyjazną atmosferą i nowoczesnym wystrojem. McDonald's Mickiewicz to miejsce, gdzie tradycyjne menu sieci McDonald's spotyka się z lokalnymi preferencjami kulinarnymi. Goście mogą cieszyć się klasycznymi ulubieńcami, takimi jak Big Mac czy McNuggets, a jednocześnie odkrywać unikalne dodatki dostosowane do lokalnego gustu. Obsługa jest szybka i przyjazna, co sprawia, że McDonald's Mickiewicz to idealne miejsce dla tych, którzy pragną delektować się klasycznymi smakami McDonald's w przyjemnym i dostosowanym do lokalnej społeczności otoczeniu.",
+        coordinates: [49.815215029671464, 19.042179211782344],
       },
       {
         id: uuidv4(),
         name: "Properek palarnia kawy",
         description:
-          "cocker desktop cocker desktop cocker desktop cocker desktop cocker desktop cocker desktop cocker desktop cocker desktop cocker desktop cocker desktop cocker desktop",
-        coordinates: [49.79121684091902, 19.04904182651327],
+          "Proper Coffee to wyjątkowa palarnia kawy, w której sztuka palenia ziaren spotyka się z pasją do doskonałego smaku kawy. Zlokalizowana w sercu miasta, ta palarnia przyciąga miłośników aromatycznej kawy i wysokiej jakości ziaren. Proper Coffee wyróżnia się nie tylko starannie dobranymi gatunkami kawy, ale także indywidualnym podejściem do procesu palenia, które podkreśla unikalne cechy każdego ziarna. W eleganckim wnętrzu Proper Coffee goście mogą delektować się świeżo paloną kawą, która oferuje bogactwo smakowe i intensywność aromatu. Przyjazna atmosfera i zaangażowany personel sprawiają, że Proper Coffee staje się ulubionym miejscem dla prawdziwych kawoszy, którzy pragną doświadczyć ręcznie palonej kawy na najwyższym poziomie.",
+        coordinates: [49.79136272658241, 19.055780386273238],
       },
     ],
   },

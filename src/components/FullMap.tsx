@@ -63,6 +63,15 @@ export const FullMap = () => {
 
   useEffect(() => {
     if (routeProvider.selectedRoute) {
+      localStorage.setItem(
+        "selectedRoute",
+        routeProvider.selectedRoute.id.toString()
+      );
+    }
+  }, [routeProvider.selectedRoute]);
+
+  useEffect(() => {
+    if (routeProvider.selectedRoute) {
       getRoutePoints(routeProvider.selectedRoute.waypoints, position).then(
         (response) => {
           parseRoutePoints(response).then((xd) => {
@@ -77,6 +86,18 @@ export const FullMap = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       setPosition(position);
     });
+
+    const gI = localStorage.getItem("selectedRoute");
+    if (gI) {
+      setTimeout(() => {
+        let localRouteId: string = gI!;
+        let foundRoute = routeProvider.routes.find((route: any) => {
+          return route.id == localRouteId;
+        });
+        if (foundRoute == null) return;
+        routeProvider.setSelectedRoute(foundRoute);
+      }, 333);
+    }
   }, []);
 
   if (!position) {
